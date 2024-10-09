@@ -32,16 +32,6 @@ const TaskDetail = () => {
     setIsEditing(true);
   };
 
-  const handleSave = async () => {
-    try {
-      await updateTask(id, editedTask);
-      setTask(editedTask);
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating task', error);
-    }
-  };
-
   const handleDelete = async () => {
     try {
       await deleteTask(id);
