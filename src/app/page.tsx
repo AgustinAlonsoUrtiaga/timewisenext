@@ -1,13 +1,13 @@
 import React from 'react';
-import './styles/HomePage.css';
 import Image from 'next/image';
+import './styles/HomePage.css';
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <div className="home-page">
       <div className="welcome-gif-container">
-          <Image
-          src="/assets/gif.webp"
+        <Image
+          src="/assets/gif.webp" // Asegúrate de que el archivo gif.webp esté en la carpeta "public/assets"
           alt="Welcome Monkey"
           width={500}
           height={500}
