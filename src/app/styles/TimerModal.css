@@ -1,0 +1,70 @@
+.timer-modal {
+    position: fixed;
+    background: #2c2f33; /* Fondo oscuro, similar al de Discord */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    width: 250px; /* Un poco más ancho para que se sienta cómodo */
+    z-index: 9999;
+    cursor: move;
+    color: #fff; /* Texto blanco para contrastar con el fondo */
+    display: flex;
+    flex-direction: column;
+    user-select: none; /* Evita que el texto se seleccione durante el arrastre */
+  }
+  
+  .timer-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #5865f2; /* Azul estilo Discord */
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 0 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  .close-button {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: color 0.2s ease;
+  }
+  
+  .close-button:hover {
+    color: #ff5c5c; /* Rojo claro al pasar el mouse */
+  }
+  
+  .timer-modal-content {
+    text-align: center;
+    padding: 1rem;
+    background: #2c2f33; /* Mismo color que el modal para un diseño uniforme */
+    border-radius: 0 0 8px 8px;
+  }
+  
+  .timer-modal h3 {
+    margin: 0;
+    font-size: 2rem;
+    color: #ffffff;
+  }
+  
+  .timer-modal.pulse {
+    animation: pulse 0.5s ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  }

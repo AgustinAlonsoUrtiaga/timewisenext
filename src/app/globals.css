@@ -1,27 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: linear-gradient(to bottom, #4a90e2 0%, #ffffff 100%);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+main {
+  flex: 1;
+  margin-top: 2rem;
+}
+
+.footer {
+  background: #2c2f33; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  text-align: center;
+  padding: 0.2rem;
+  font-size: 1rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  margin-top: auto; /* Esto permite que el footer se mantenga al fondo */
 }
