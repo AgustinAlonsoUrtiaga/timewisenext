@@ -24,6 +24,17 @@ export const getTaskById = async (id) => {
   }
 };
 
+export const getTaskByEnvironment = async (env) => {
+  try {
+    const encodedEnv = encodeURIComponent(env);
+    const response = await axios.get(`${API_URL}/environment/${encodedEnv}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching task by environment:', error);
+    throw error;
+  }
+};
+
 // Eliminar una tarea por ID
 export const deleteTask = async (id) => {
   try {

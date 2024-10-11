@@ -2,18 +2,27 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createTask } from '@/services/taskService'; // Ajusta la ruta de importación según la estructura de tu proyecto
+import { createTask } from '@/services/taskService';
 import '../styles/CreateTask.css';
+import { useAppContext } from '@/context/AppContext';
+import useAuth from '../middleware/authMiddleware';
 
 const CreateTask = () => {
   const router = useRouter();
+  const { env } = useAppContext();
+  const isAuthenticated = useAuth();
+
+  if (!isAuthenticated) {
+    return null;
+  }
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     estimatedTime: '',
     priority: 3,
     status: 'To Do',
-    dueDate: ''
+    dueDate: '',
+    environment: env || 'SMP CH TEST'
   });
   const [error, setError] = useState('');
 
@@ -92,6 +101,17 @@ const CreateTask = () => {
           <option value="To Do">To Do</option>
           <option value="In Progress">In Progress</option>
           <option value="Done">Done</option>
+        </select>
+        <select
+          name="environment"
+          value={formData.environment}
+          onChange={handleChange}
+          className="form-select"
+        >
+          <option value="SMP CH TEST">SMP CH TEST</option>
+          <option value="SMP CH PROD">SMP CH PROD</option>
+          <option value="SMP US TEST">SMP US TEST</option>
+          <option value="SMP US PROD">SMP US PROD</option>
         </select>
         <button type="submit" className="submit-button">
           Create Task

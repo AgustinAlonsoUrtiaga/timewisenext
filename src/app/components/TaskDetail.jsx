@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { deleteTask, getTaskById, updateTask } from '../services/taskService';
 import '../styles/TaskDetail.css';
+import useAuth from '../middleware/authMiddleware';
 
 const TaskDetail = () => {
+  const isAuthenticated = useAuth();
+
+  if (!isAuthenticated) {
+    return null;
+  }
   const { id } = useParams();
   const navigate = useNavigate();
   const [task, setTask] = useState(null);
