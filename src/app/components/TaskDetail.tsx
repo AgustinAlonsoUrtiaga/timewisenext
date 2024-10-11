@@ -1,22 +1,33 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { deleteTask, getTaskById, updateTask } from '../services/taskService';
+import { useRouter, useParams } from 'next/navigation';
+import { deleteTask, getTaskById } from '@/services/taskService';
 import '../styles/TaskDetail.css';
 import useAuth from '../middleware/authMiddleware';
 
-const TaskDetail = () => {
-  const isAuthenticated = useAuth();
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  estimatedTime: number;
+  timeUnit: string;
+  status: string;
+  priority: number;
+  createdDate: string;
+  dueDate: string;
+  urgent: boolean;
+}
 
-  if (!isAuthenticated) {
-    return null;
-  }
+const TaskDetail: React.FC = () => {
+  const isAuthenticated = useAuth();
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [task, setTask] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState({});
+  const router = useRouter();
+  const [task, setTask] = useState<Task | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editedTask, setEditedTask] = useState<Partial<Task>>({});
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -41,27 +52,34 @@ const TaskDetail = () => {
   const handleDelete = async () => {
     try {
       await deleteTask(id);
-      navigate('/');
+      router.push('/tasks');
     } catch (error) {
       console.error('Error deleting task', error);
     }
   };
 
-  const priorityClass = `priority-${task?.priority || 3}`; // Usa prioridad 3 por defecto si no se define
+  const priorityClass = `priority-${task?.priority || 3}`; // Default to priority 3 if not defined
+
+  if (!isAuthenticated) {
+    router.push('/auth'); // Redirect to the login page if not authenticated.
+    return null;
+  }
 
   if (loading) return <p>Loading task details...</p>;
   if (error) return <p>{error}</p>;
+
+  if (!task) {
+    return <p>No task found.</p>;
+  }
 
   return (
     <div className="task-detail">
       <div className={`task-detail-card ${priorityClass}`}>
         {isEditing ? (
-          // Modo edición: muestra un formulario para editar la tarea
           <form className="task-edit-form">
-            {/* Campos de edición */}
+            {/* Editable fields go here */}
           </form>
         ) : (
-          // Modo visualización: muestra los detalles de la tarea
           <>
             <h2>{task.title}</h2>
             <p className="task-detail-description">{task.description}</p>
@@ -72,7 +90,9 @@ const TaskDetail = () => {
               </div>
               <div className="task-info-item">
                 <span className="task-info-label">Estimated Time:</span>
-                <span className="task-info-value">{task.estimatedTime} {task.timeUnit}</span>
+                <span className="task-info-value">
+                  {task.estimatedTime} {task.timeUnit}
+                </span>
               </div>
               <div className="task-info-item">
                 <span className="task-info-label">Priority:</span>
@@ -80,11 +100,15 @@ const TaskDetail = () => {
               </div>
               <div className="task-info-item">
                 <span className="task-info-label">Created Date:</span>
-                <span className="task-info-value">{new Date(task.createdDate).toLocaleDateString()}</span>
+                <span className="task-info-value">
+                  {new Date(task.createdDate).toLocaleDateString()}
+                </span>
               </div>
               <div className="task-info-item">
                 <span className="task-info-label">Due Date:</span>
-                <span className="task-info-value">{new Date(task.dueDate).toLocaleDateString()}</span>
+                <span className="task-info-value">
+                  {new Date(task.dueDate).toLocaleDateString()}
+                </span>
               </div>
               {task.urgent && (
                 <div className="task-info-item urgent">

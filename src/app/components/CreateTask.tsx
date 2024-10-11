@@ -1,20 +1,17 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { createTask } from '@/services/taskService';
-import '../styles/CreateTask.css';
-import { useAppContext } from '@/context/AppContext';
-import useAuth from '../middleware/authMiddleware';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createTask } from "@/services/taskService";
+import "../styles/CreateTask.css";
+import { useAppContext } from "@/context/AppContext";
+import useAuth from "../middleware/authMiddleware";
 
 const CreateTask = () => {
   const router = useRouter();
   const { env } = useAppContext();
   const isAuthenticated = useAuth();
 
-  if (!isAuthenticated) {
-    return null;
-  }
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -22,11 +19,13 @@ const CreateTask = () => {
     priority: 3,
     status: 'To Do',
     dueDate: '',
-    environment: env || 'SMP CH TEST'
+    environment: env || 'SMP CH TEST',
   });
   const [error, setError] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -35,11 +34,15 @@ const CreateTask = () => {
     e.preventDefault();
     try {
       await createTask(formData);
-      router.push('/tasks'); // Redirige a la lista de tareas después de crear la tarea
+      router.push('/tasks'); // Redirect to the task list page after creating the task
     } catch (error) {
       setError('Failed to create task. Please try again.');
     }
   };
+
+  if (!isAuthenticated) {
+    return <p>Loading...</p>; // Optional: You can replace this with a better loading indicator or redirect logic.
+  }
 
   return (
     <div className="create-task-container">
