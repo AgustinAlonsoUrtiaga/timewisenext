@@ -6,12 +6,12 @@ import '../styles/TaskCard.css';
 import useAuth from '../middleware/authMiddleware';
 
 const TaskCard = ({ task, onStart }) => {
+  const router = useRouter();
   const isAuthenticated = useAuth();
 
   if (!isAuthenticated) {
     return null;
   }
-  const router = useRouter();
   const { id, title, urgent, estimatedTime, timeUnit, status, priority } = task;
 
   const goToDetail = () => {
