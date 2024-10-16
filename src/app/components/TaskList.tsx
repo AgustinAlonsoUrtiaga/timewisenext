@@ -17,32 +17,7 @@ interface Task {
   estimatedTime: number;
   priority: number;
 }
-const dummyTasks: Task[] = [
-  {
-    id: "1",
-    title: "Create Wireframes",
-    description: "Design wireframes for the upcoming project",
-    status: "In Progress",
-    estimatedTime: 3,
-    priority: 1,
-  },
-  {
-    id: "2",
-    title: "API Integration",
-    description: "Integrate the new API with the frontend",
-    status: "Pending",
-    estimatedTime: 5,
-    priority: 2,
-  },
-  {
-    id: "3",
-    title: "Fix UI Bugs",
-    description: "Resolve all reported UI issues in the app",
-    status: "Completed",
-    estimatedTime: 2,
-    priority: 3,
-  },
-];
+
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activeTimers, setActiveTimers] = useState<{ id: string; title: string; duration: number }[]>([]);
@@ -50,28 +25,12 @@ const TaskList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Fetch tasks based on the current environment
-  // useEffect(() => {
-  //  const fetchTasks = async () => {
-  //    setLoading(true);
-  //    try {
-  //      const data = await getTaskByEnvironment(environment);
-  //      setTasks(data);
-  //    } catch (error) {
-  //      console.error("Failed to fetch tasks:", error);
-  //    } finally {
-  //      setLoading(false);
-  //    }
-  //  };
-
-  //  fetchTasks();
-  //}, [environment]);
-  useEffect(() => {
+   useEffect(() => {
     const fetchTasks = async () => {
       setLoading(true);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setTasks(dummyTasks);
+        const data = await getTaskByEnvironment(environment);
+        setTasks(data);
       } catch (error) {
         console.error("Failed to fetch tasks:", error);
       } finally {
@@ -81,6 +40,7 @@ const TaskList: React.FC = () => {
 
     fetchTasks();
   }, [environment]);
+
   const handleCreateTask = () => {
     router.push("/tasks/create");
   };

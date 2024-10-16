@@ -5,18 +5,6 @@ import { useRouter } from 'next/navigation';
 import { deleteTask, getTaskById, updateTask } from '@/services/taskService';
 import '../../styles/TaskDetail.css';
 
-const dummyTask = {
-  id: "1",
-  title: "Create Wireframes",
-  description: "Design wireframes for the upcoming project. Ensure that all user interactions and major flows are covered.",
-  estimatedTime: 3,
-  timeUnit: "hours",
-  status: "In Progress",
-  priority: 1,
-  createdDate: "2023-10-01",
-  dueDate: "2023-10-15",
-  urgent: true,
-};
 
 const TaskDetail = ({ params }) => {
   const router = useRouter();
@@ -30,7 +18,7 @@ const TaskDetail = ({ params }) => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const data = dummyTask;
+        const data = await getTaskById(id);
         setTask(data);
         setEditedTask(data);
       } catch (error) {
@@ -60,7 +48,7 @@ const TaskDetail = ({ params }) => {
   const handleDelete = async () => {
     try {
       await deleteTask(id);
-      router.push('/tasks'); // Redirige a la lista de tareas después de eliminar
+      router.push('/tasks');
     } catch (error) {
       console.error('Error deleting task', error);
     }
