@@ -17,40 +17,38 @@ interface Task {
   estimatedTime: number;
   priority: number;
 }
-
+const dummyTasks: Task[] = [
+  {
+    id: "1",
+    title: "Create Wireframes",
+    description: "Design wireframes for the upcoming project",
+    status: "In Progress",
+    estimatedTime: 3,
+    priority: 1,
+  },
+  {
+    id: "2",
+    title: "API Integration",
+    description: "Integrate the new API with the frontend",
+    status: "Pending",
+    estimatedTime: 5,
+    priority: 2,
+  },
+  {
+    id: "3",
+    title: "Fix UI Bugs",
+    description: "Resolve all reported UI issues in the app",
+    status: "Completed",
+    estimatedTime: 2,
+    priority: 3,
+  },
+];
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activeTimers, setActiveTimers] = useState<{ id: string; title: string; duration: number }[]>([]);
   const { environment } = useAppContext();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
-  const dummyTasks: Task[] = [
-    {
-      id: "1",
-      title: "Create Wireframes",
-      description: "Design wireframes for the upcoming project",
-      status: "In Progress",
-      estimatedTime: 3,
-      priority: 1,
-    },
-    {
-      id: "2",
-      title: "API Integration",
-      description: "Integrate the new API with the frontend",
-      status: "Pending",
-      estimatedTime: 5,
-      priority: 2,
-    },
-    {
-      id: "3",
-      title: "Fix UI Bugs",
-      description: "Resolve all reported UI issues in the app",
-      status: "Completed",
-      estimatedTime: 2,
-      priority: 3,
-    },
-  ];
 
   // Fetch tasks based on the current environment
   // useEffect(() => {
