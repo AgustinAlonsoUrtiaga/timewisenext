@@ -138,10 +138,10 @@ const CreateTask = () => {
             onChange={handleChange}
             className="form-select"
           >
-            <option value="SMP CH TEST">Server 1</option>
-            <option value="SMP CH PROD">Server 2</option>
-            <option value="SMP US TEST">Server 3</option>
-            <option value="SMP US PROD">Server 4</option>
+            <option value="SMP CH TEST">SERVER 1</option>
+            <option value="SMP CH PROD">SERVER 2</option>
+            <option value="SMP US TEST">SERVER 3</option>
+            <option value="SMP US PROD">SERVER 4</option>
           </select>
         </div>
         <button type="submit" className="submit-button">

@@ -58,7 +58,6 @@ const TaskList: React.FC = () => {
 
   return (
     <div className="task-list-container">
-      {/* The header remains visible at all times */}
       <div className="task-list-header">
         <h2>Your Tasks</h2>
         <button className="create-task-button" onClick={handleCreateTask}>
@@ -66,7 +65,6 @@ const TaskList: React.FC = () => {
         </button>
       </div>
 
-      {/* This section only shows the loading spinner or tasks */}
       <div className="task-list">
         {loading ? (
         <div className="loading-container">
