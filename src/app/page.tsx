@@ -14,7 +14,7 @@ const HomePage = () => {
           className="welcome-gif"
           priority
         />
-        <h1 className="welcome-message">My Node.js server is under maintenance, so the information on the page will be dummy data. Please accept my apologies</h1>
+        <h1 className="welcome-message">Good to see you!</h1>
       </div>
     </div>
   );
