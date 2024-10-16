@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import '../styles/TaskCard.css';
 import useAuth from '../middleware/authMiddleware';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const TaskCard = ({ task, onStart }) => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const TaskCard = ({ task, onStart }) => {
       <button
         className="start-button"
         onClick={(e) => {
-          e.stopPropagation(); // Evita que el click en el botón inicie la navegación
+          e.stopPropagation();
           onStart();
         }}
       >

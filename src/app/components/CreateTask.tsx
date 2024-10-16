@@ -34,14 +34,14 @@ const CreateTask = () => {
     e.preventDefault();
     try {
       await createTask(formData);
-      router.push('/tasks'); // Redirect to the task list page after creating the task
+      router.push('/tasks');
     } catch (error) {
       setError('Failed to create task. Please try again.');
     }
   };
 
   if (!isAuthenticated) {
-    return <p>Loading...</p>; // Optional: You can replace this with a better loading indicator or redirect logic.
+    return <p>Loading...</p>;
   }
 
   return (

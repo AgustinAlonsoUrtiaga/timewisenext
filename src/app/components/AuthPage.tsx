@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email === "user@example.com" && password === "password") {
+    if (true) {
       localStorage.setItem("authToken", "yourAuthToken");
       router.push("/tasks");
     } else {
@@ -23,25 +23,9 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Login to TimeWise</h2>
+        <h2 className="login-title">Welcome to the portfolio of Agustín Alonso! Please log in to explore my work</h2>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-            className="login-input"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            className="login-input"
-          />
           <button type="submit" className="login-button">
             Login
           </button>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { deleteTask, getTaskById, updateTask } from '@/services/taskService'; // Ajusta la ruta según tu estructura de carpetas
+import { deleteTask, getTaskById, updateTask } from '@/services/taskService';
 import '../../styles/TaskDetail.css';
 
 const TaskDetail = ({ params }) => {
@@ -13,11 +13,22 @@ const TaskDetail = ({ params }) => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({});
-
+  const dummyTask = {
+    id: "1",
+    title: "Create Wireframes",
+    description: "Design wireframes for the upcoming project. Ensure that all user interactions and major flows are covered.",
+    estimatedTime: 3,
+    timeUnit: "hours",
+    status: "In Progress",
+    priority: 1,
+    createdDate: "2023-10-01",
+    dueDate: "2023-10-15",
+    urgent: true,
+  };
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const data = await getTaskById(id);
+        const data = dummyTask;
         setTask(data);
         setEditedTask(data);
       } catch (error) {

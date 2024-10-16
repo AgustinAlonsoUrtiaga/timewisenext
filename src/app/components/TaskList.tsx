@@ -25,13 +25,55 @@ const TaskList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const dummyTasks: Task[] = [
+    {
+      id: "1",
+      title: "Create Wireframes",
+      description: "Design wireframes for the upcoming project",
+      status: "In Progress",
+      estimatedTime: 3,
+      priority: 1,
+    },
+    {
+      id: "2",
+      title: "API Integration",
+      description: "Integrate the new API with the frontend",
+      status: "Pending",
+      estimatedTime: 5,
+      priority: 2,
+    },
+    {
+      id: "3",
+      title: "Fix UI Bugs",
+      description: "Resolve all reported UI issues in the app",
+      status: "Completed",
+      estimatedTime: 2,
+      priority: 3,
+    },
+  ];
+
   // Fetch tasks based on the current environment
+  // useEffect(() => {
+  //  const fetchTasks = async () => {
+  //    setLoading(true);
+  //    try {
+  //      const data = await getTaskByEnvironment(environment);
+  //      setTasks(data);
+  //    } catch (error) {
+  //      console.error("Failed to fetch tasks:", error);
+  //    } finally {
+  //      setLoading(false);
+  //    }
+  //  };
+
+  //  fetchTasks();
+  //}, [environment]);
   useEffect(() => {
     const fetchTasks = async () => {
       setLoading(true);
       try {
-        const data = await getTaskByEnvironment(environment);
-        setTasks(data);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setTasks(dummyTasks);
       } catch (error) {
         console.error("Failed to fetch tasks:", error);
       } finally {
@@ -41,17 +83,14 @@ const TaskList: React.FC = () => {
 
     fetchTasks();
   }, [environment]);
-
   const handleCreateTask = () => {
-    router.push("/tasks/create"); // Adjust this path according to your routing structure for task creation
+    router.push("/tasks/create");
   };
 
   const handleOpenTimer = (task: Task) => {
     const existingTimer = activeTimers.find((timer) => timer.id === task.id);
     if (!existingTimer) {
       setActiveTimers([...activeTimers, { id: task.id, title: task.title, duration: task.estimatedTime }]);
-    } else {
-      // Handle the case where a timer already exists for this task
     }
   };
 
@@ -59,21 +98,25 @@ const TaskList: React.FC = () => {
     setActiveTimers(activeTimers.filter((timer) => timer.id !== id));
   };
 
-  // Display a loading indicator while tasks are being fetched
-  if (loading) {
-    return <div>Loading tasks...</div>;
-  }
-
   return (
     <div className="task-list-container">
+      {/* The header remains visible at all times */}
       <div className="task-list-header">
         <h2>Your Tasks</h2>
         <button className="create-task-button" onClick={handleCreateTask}>
           <FaPlus /> New Task
         </button>
       </div>
+
+      {/* This section only shows the loading spinner or tasks */}
       <div className="task-list">
-        {tasks.length > 0 ? (
+        {loading ? (
+        <div className="loading-container">
+          <div className="skeleton-task"></div>
+          <div className="skeleton-task"></div>
+          <div className="skeleton-task"></div>
+        </div>
+        ) : tasks.length > 0 ? (
           tasks.map((task) => (
             <TaskCard key={task.id} task={task} onStart={() => handleOpenTimer(task)} />
           ))
@@ -81,6 +124,7 @@ const TaskList: React.FC = () => {
           <p>No tasks available</p>
         )}
       </div>
+
       {activeTimers.map((timer) => (
         <TimerModal
           key={timer.id}
