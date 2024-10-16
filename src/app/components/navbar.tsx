@@ -42,10 +42,10 @@ const Navbar = () => {
               onChange={handleEnvironmentChange}
               className="environment-dropdown"
             >
-              <option value="SMP CH TEST">SERVER 1</option>
-              <option value="SMP CH PROD">SERVER 2</option>
-              <option value="SMP US TEST">SERVER 3</option>
-              <option value="SMP US PROD">SERVER 4</option>
+              <option value="SERVER 1">SERVER 1</option>
+              <option value="SERVER 2">SERVER 2</option>
+              <option value="SERVER 3">SERVER 3</option>
+              <option value="SERVER 4">SERVER 4</option>
             </select>
           </div>
           <ul className="navbar-links">
