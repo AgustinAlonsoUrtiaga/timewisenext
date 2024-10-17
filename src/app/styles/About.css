@@ -25,3 +25,37 @@
     line-height: 1.6;
     margin: 15px 0;
   }
+
+  .skills-section {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .skills-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .skill-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .skill-item p {
+    font-size: 1rem;
+    font-weight: bold;
+  }
