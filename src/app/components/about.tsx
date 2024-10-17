@@ -11,7 +11,7 @@ export default function About() {
         <p>
           I see you&apos;re checking out my page—how exciting! Let me quickly introduce myself. 
           I&apos;m a systems engineering student who started out as a junior developer at a startup in Buenos Aires, Argentina. 
-          There, I worked with <strong>Node.js</strong>, <strong>Next.js</strong>, and <strong>Angular</strong>, 
+          There, I worked with <strong>Node.js</strong>, <strong>Java</strong>, <strong>Next.js</strong>, and <strong>Angular</strong>, 
           all within the <strong>Redux</strong> ecosystem.
         </p>
         <p>
