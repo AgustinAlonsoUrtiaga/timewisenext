@@ -4,11 +4,14 @@ import Link from "next/link";
 import { useAppContext } from "../../context/AppContext";
 import { Menu, MenuItem, IconButton, Avatar, Typography, Box } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
 import "../styles/Navbar.css";
+
 const Navbar = () => {
   const { environment, updateEnvironment } = useAppContext();
-  const isAuthenticated = true; // Aquí podrías agregar la lógica para verificar si el usuario está autenticado.
+  const isAuthenticated = true;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleEnvironmentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEnvironment = event.target.value;
@@ -29,13 +32,31 @@ const Navbar = () => {
     handleMenuClose();
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav className="navbar">
       <Box className="navbar-content" display="flex" alignItems="center" justifyContent="space-between">
         <Link href="/" className="navbar-title">
           TimeWise
         </Link>
-        <Box display="flex" alignItems="center" gap={2}>
+
+        <IconButton className="mobile-menu-icon" onClick={toggleMobileMenu}>
+          <MenuIcon />
+        </IconButton>
+
+        <Box className={`navbar-links ${isMobileMenuOpen ? 'open' : ''}`}>
+          <ul>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/tasks">Tasks</Link></li>
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+          </ul>
+        </Box>
+
+        <Box className="navbar-right" display="flex" alignItems="center" gap={2}>
           <div className="environment-select">
             <select
               value={environment}
@@ -48,12 +69,8 @@ const Navbar = () => {
               <option value="SERVER 4">SERVER 4</option>
             </select>
           </div>
-          <ul className="navbar-links">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/tasks">Tasks</Link></li>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-          </ul>
+          
+          {/* Icono de perfil */}
           {isAuthenticated && (
             <div>
               <IconButton

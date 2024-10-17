@@ -21,10 +21,13 @@
   font-weight: bold;
 }
 
-.navbar-links {
+/* Estilos del menú de enlaces */
+.navbar-links ul {
   display: flex;
   gap: 1.5rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-links a {
@@ -37,17 +40,50 @@
   color: #e1e1e1;
 }
 
+/* Estilos para el menú hamburguesa */
+.mobile-menu-icon {
+  display: none;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: #3498db;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    transition: max-height 0.3s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .navbar-links.open {
+    display: flex;
+    max-height: 300px;
+  }
+
+  .navbar-links ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mobile-menu-icon {
+    display: inline-block;
+  }
+}
+
+/* Estilos adicionales para el dropdown de servidores */
 .environment-select {
-  position: relative;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 0.2rem 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease;
-}
-
-.environment-select:hover {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .environment-dropdown {
@@ -58,160 +94,11 @@
   padding: 0.5rem;
   border-radius: 8px;
   outline: none;
-  appearance: none; /* Hide default dropdown icon */
+  appearance: none;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-  width: 100%;
-}
-
-.environment-dropdown:focus {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
 }
 
 .environment-dropdown option {
-  background: #3498db; /* Background of options */
-  color: #ffffff; /* White text for options */
-  padding: 0.5rem;
-}
-
-.logout-button {
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logout-button:hover {
-  background-color: #2980b9;
-}
-
-.logout-button:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.user-menu {
-  position: relative;
-  margin-left: 1rem;
-}
-
-.user-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fff;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease;
-}
-
-.user-button:hover {
-  color: #f1c40f;
-}
-
-.user-icon {
-  font-size: 2rem;
-}
-
-.user-dropdown {
-  position: absolute;
-  right: 0;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
-  width: 150px;
-  text-align: left;
-  z-index: 10;
-}
-
-.user-dropdown-item {
-  padding: 0.5rem 1rem;
-  display: block;
-  text-decoration: none;
-  color: #333;
-  transition: background-color 0.3s ease;
-}
-
-.user-dropdown-item:hover {
-  background-color: #3498db;
-  color: #fff;
-}
-
-.navbar {
-  background: #3498db; /* Color de fondo de la barra de navegación */
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.user-profile {
-  position: relative;
-}
-
-.profile-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-
-.profile-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 150px;
-  overflow: hidden;
-  margin-top: 0.5rem;
-  z-index: 1000;
-}
-
-.profile-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  right: 15px;
-  border-width: 0 5px 5px 5px;
-  border-style: solid;
-  border-color: transparent transparent #fff transparent;
-}
-
-.profile-link {
-  display: block;
-  padding: 0.75rem 1rem;
-  color: #333;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-
-.profile-link:hover {
-  background: #f2f2f2;
-}
-
-.logout-button {
-  background: #e74c3c;
-  color: #fff;
-  border: none;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.logout-button:hover {
-  background: #c0392b;
+  background: #3498db;
+  color: #ffffff;
 }
